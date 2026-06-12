@@ -6,7 +6,7 @@ import Title from './Title.jsx';
 import { useAppContext } from '../context/Context.jsx';
 
 const Home = () => {
-    const { Api } = useAppContext();
+    const { Api,cUserName,cPassword } = useAppContext();
     let [count,setCount] = useState(1);
     const Next= () => {
         if(count < Api.length-3) setCount(count+1);
@@ -19,7 +19,7 @@ const Home = () => {
         <>
             <div className="w-full h-auto bg-gray-100 py-10">
                 <div className="mt-16">
-                    <Title />
+                    <Title title={cUserName} />
                     <div style={{ display: "flex", justifyContent: "flex-end", marginRight: '60px', marginTop: '20px', onHover: { marginBottom: '10px' } }}>
                         <button className="border-none cursor-pointer ml-10 hover:-translate-y-1 transition-transform" onClick={prev}><FaArrowLeft /></button>
                         <button className="border-none cursor-pointer ml-2 hover:-translate-y-1 transition-transform" onClick={Next}><FaArrowRight /></button>
