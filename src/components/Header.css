@@ -1,0 +1,47 @@
+/* Header component styles extracted from inline styles */
+#mainHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 56px;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+#navLogo {
+  margin-left: 2.5rem;
+}
+
+#navLogo img,
+.logo {
+  width: 100px;
+  height: auto;
+  display: block;
+}
+
+#navButtons,
+#navActions {
+  margin-right: 2.5rem;
+  display: flex;
+  gap: 0.5rem;
+  color: #000000;
+}
+
+#navButtons input[type="button"],
+#navActions input[type="button"] {
+  height: 32px;
+  color: #000000;
+  border-radius: 6px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #ffffff;
+  padding: 0 12px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#navButtons input[type="button"]:hover,
+#navActions input[type="button"]:hover {
+  background: #000000;
+  color: #ffffff;
+}
