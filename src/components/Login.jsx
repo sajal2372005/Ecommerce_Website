@@ -1,33 +1,62 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import Fashion from '../assets/Fashion.png';
 import './login.css';
-import {Link,useNavigate} from 'react-router-dom';
-import {useAppContext} from '../context/Context.jsx';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAppContext } from '../context/Context.jsx';
 
 
 const Login = () => {
-    const useToken = localStorage.getItem("token");
-    const useUserName = localStorage.getItem("UserName");
-    const usePassword = localStorage.getItem("Password");
-    const {cUserName,cSetUserName,cPassword,cSetPassword} = useAppContext();
+    // const useToken = localStorage.getItem("token");
+    // const useUserName = localStorage.getItem("UserName");
+    // const usePassword = localStorage.getItem("Password");
+    // const {cUserName,cSetUserName,cPassword,cSetPassword} = useAppContext();
+    // const navigate = useNavigate();
+    // const [userName,setUserName] = useState(useUserName || "");
+    // const [password,setPassword] = useState(usePassword || "");
+    // const handleLogin = () =>{
+    //     if (!useToken) {
+    //         alert("Please sign up to log in");
+    //         navigate('/signup');
+    //         return;
+    //     }
+    //     if(userName === "" || password === ""){
+    //         alert("Please fill in all fields");
+    //         return;
+    //     }
+    //     else{
+    //         if(userName === useUserName && password === usePassword){
+    //             cSetUserName(userName);
+    //             cSetPassword(password);
+    //             navigate('/');
+    //         }
+    //         else{
+    //             alert("Invalid username or password");
+    //         }
+    //     }
+    // }
+    const localUserName = localStorage.getItem("UserName");
+    const localPassword = localStorage.getItem("Password");
     const navigate = useNavigate();
-    const [userName,setUserName] = useState(useUserName || "");
-    const [password,setPassword] = useState(usePassword || "");
-    const handleLogin = () =>{
-        if(userName === "" || password === ""){
+    const [LuserName, setUserName] = useState(localUserName || "");
+    const [Lpassword, setPassword] = useState(localPassword || "");
+    const { CLogin } = useAppContext();
+    
+
+
+
+    const handleLogin = () => {
+        if (LuserName === "" || Lpassword === "") {
             alert("Please fill in all fields");
             return;
         }
         else{
-            if(userName === useUserName && password === usePassword){
-                cSetUserName(userName);
-                cSetPassword(password);
+            const token = CLogin(LuserName, Lpassword);
+            if(token) {
                 navigate('/');
             }
-            else{
-                alert("Invalid username or password");
-            }
+            
         }
+        
     }
     return (
         <>
@@ -40,10 +69,10 @@ const Login = () => {
                     </div>
                     <h1 className="login-page__title">Welcome to Our Store!</h1>
                     <p className="login-page__subtitle">Please log in to access your account and start shopping.</p>
-                    <input type="text" className="login-page__input" placeholder="Username" value={userName} onChange={(e)=>{setUserName(e.target.value)}}/>
-                    <input type="password" className="login-page__input" placeholder="Password" value={password} onChange={(e)=>{setPassword(e.target.value)}} />
+                    <input type="text" className="login-page__input" placeholder="Username" value={LuserName} onChange={(e) => { setUserName(e.target.value) }} />
+                    <input type="password" className="login-page__input" placeholder="Password" value={Lpassword} onChange={(e) => { setPassword(e.target.value) }} />
                     <button id="login-button" onClick={handleLogin}>Log In</button>
-                     <p className="login-page__signup-link">Don't have an account? <Link to="/signup"style={{color: 'blue', textDecoration: 'underline',display:'inline'}}>Sign Up</Link></p>
+                    <p className="login-page__signup-link">Don't have an account? <Link to="/signup" style={{ color: 'blue', textDecoration: 'underline', display: 'inline' }}>Sign Up</Link></p>
 
                 </div>
 

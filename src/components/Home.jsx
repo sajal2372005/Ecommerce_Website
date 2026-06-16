@@ -27,11 +27,8 @@ const Home = () => {
                 </div>
                 <div className="w-[95%] mx-auto mt-5 bg-white border border-gray-300 py-10 px-5 flex flex-wrap justify-around items-center gap-6 rounded-xl">
                     {
-                        // Api.map((item) => {
-                        //     return <Cards key={item.id} title={item.title} price={item.price} image={item.image} />
-                        // })
                         Api.slice(count,count+3).map((item) => {
-                            return <Cards key={item.id} title={item.title} price={item.price} image={item.image} />
+                            return <Cards key={item.id} id={item.id} title={item.title} price={item.price} image={item.image} />
                         })
                     }
 

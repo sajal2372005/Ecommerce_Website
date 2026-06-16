@@ -37,6 +37,7 @@ const SignUp = () => {
                     <input type="password" className="login-page__input" placeholder="Password" value={password} onChange={(e)=>{setPassword(e.target.value)}} />
                     <input type="email" className="login-page__input" placeholder="Email" value={email} onChange={(e)=>{setEmail(e.target.value)}} />
                     <button id="login-button" onClick={handleLogin}>Sign Up</button>
+                    <p className="login-page__signup-link">Do you have an account? <Link to="/login" style={{ color: 'blue', textDecoration: 'underline', display: 'inline' }}>Log In</Link></p>
 
                 </div>
 

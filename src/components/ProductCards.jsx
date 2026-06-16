@@ -1,15 +1,21 @@
 import React,{useState} from 'react';
 import {useAppContext} from '../context/Context.jsx';
 
-const Cards = ({id, title, price, image }) => {
+const ProductCards = ({id, title, price, image }) => {
     const {product,addToCart,removeFromCart} = useAppContext();
-    
+    const [count, setCount] = useState(1);
     const isAdded = product.some((item) => item.id === id);
     const handleAddToCart = (id, title, price, image) =>{
         addToCart({id,title,price,image})
     }
     const handleRemoveFromCart = (id) =>{
-        removeFromCart(id);
+        if(count>1) {
+            setCount(count-1);
+        }
+        else{
+            removeFromCart(id);
+        }
+        
     }
     return (
         <div className="w-full max-w-[400px] bg-white border border-gray-100 rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-xl transition-shadow duration-300">
@@ -25,15 +31,18 @@ const Cards = ({id, title, price, image }) => {
                     <div className="flex flex-col items-start w-full p-5 bg-gray-50 border-t border-gray-100 gap-2">
                         <p className="text-gray-800 font-medium text-lg line-clamp-1">{title}</p>
                         <p className="text-2xl font-bold text-black">${price.toFixed(2)}</p>
-                        {isAdded === false ? <button className="w-full mt-3 bg-black text-white py-3 px-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors" onClick={()=>{handleAddToCart(id, title, price, image)}}>
-                            Add to Cart
-                        </button>:<button className="w-full mt-3 bg-green-400 text-white py-3 px-4 rounded-lg font-semibold hover:bg-green-400 transition-colors" onClick={()=>{handleRemoveFromCart(id)}}>
-                            Added to Cart
-                        </button>}
-                        {/*  */}
+
+                        
+                        <div className=" flex justify-between w-full mt-3 bg-black text-white py-3 px-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
+                            <button style={{ fontWeight: 'bold', width: '40px' }} onClick={()=>handleRemoveFromCart(id)}>-</button>
+                            <span style={{ fontWeight: 'bold' }}>{count}</span>
+                            <button style={{ fontWeight: 'bold', width: '40px' }} onClick={()=>{setCount(count+1)}}>+</button>
+                        </div>
+
+                        
                     </div>
         </div>
     )
 }
 
-export default Cards;
+export default ProductCards;
