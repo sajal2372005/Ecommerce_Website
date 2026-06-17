@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Fashion from '../assets/Fashion.png';
 import './login.css';
 import { Link, useNavigate } from 'react-router-dom';
@@ -39,21 +39,22 @@ const Login = () => {
     const navigate = useNavigate();
     const [LuserName, setUserName] = useState(localUserName || "");
     const [Lpassword, setPassword] = useState(localPassword || "");
-    const { CLogin } = useAppContext();
-    
+    const { state, dispatch } = useAppContext();
 
 
-
+    useEffect(() =>{
+        if (state.isLoggedIn){
+            navigate('/');
+        }
+        
+    },[state.isLoggedIn])
     const handleLogin = () => {
         if (LuserName === "" || Lpassword === "") {
             alert("Please fill in all fields");
             return;
         }
         else{
-            const token = CLogin(LuserName, Lpassword);
-            if(token) {
-                navigate('/');
-            }
+            dispatch({type:"login", payload:{username: LuserName, password: Lpassword}});
             
         }
         

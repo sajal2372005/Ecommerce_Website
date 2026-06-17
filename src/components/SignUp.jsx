@@ -6,18 +6,23 @@ import {useAppContext} from '../context/Context.jsx';
 
 
 const SignUp = () => {
-    const {cUserName,cSetUserName,cPassword,cSetPassword,addUser} = useAppContext();
+    const {cUserName,cSetUserName,cPassword,cSetPassword,dispatch} = useAppContext();
     const navigate = useNavigate();
     const [userName,setUserName] = useState("");
     const [password,setPassword] = useState("");
     const [email,setEmail] = useState("");
+    const [firstName,setFirstName] = useState("");
     const handleLogin = () =>{
-        if(userName === "" || password === "" || email === ""){
+        if(userName === "" || password === "" || email === "" || firstName === ""){
             alert("Please fill in all fields");
             return;
         }
         else{
-            addUser(userName,password,email)
+            dispatch({type:"signup", payload:{username: userName, password: password, email: email,role: "user",firstName: firstName}});
+            localStorage.setItem("UserName", userName);
+            localStorage.setItem("email", email);
+            localStorage.setItem("firstName", firstName);
+            localStorage.setItem("role", "user");
             navigate('/');
         }
     }
@@ -32,7 +37,7 @@ const SignUp = () => {
                         <img src={Fashion} alt="logo" className="login-page__logo" />
                     </div>
                     <h1 className="login-page__title">Welcome to Our Store!</h1>
-                    <p className="login-page__subtitle">Please Sign Up to access your account and start shopping.</p>
+                    <input type="text" className="login-page__input" placeholder="FirstName" value={firstName} onChange={(e)=>{setFirstName(e.target.value)}}/>
                     <input type="text" className="login-page__input" placeholder="Username" value={userName} onChange={(e)=>{setUserName(e.target.value)}}/>
                     <input type="password" className="login-page__input" placeholder="Password" value={password} onChange={(e)=>{setPassword(e.target.value)}} />
                     <input type="email" className="login-page__input" placeholder="Email" value={email} onChange={(e)=>{setEmail(e.target.value)}} />

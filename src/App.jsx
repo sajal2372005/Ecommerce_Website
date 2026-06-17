@@ -8,6 +8,7 @@ import AppProvider from './context/Context.jsx';
 import SignUp from './components/SignUp.jsx';
 import Products from './components/Products.jsx';
 import Cart from './components/Cart.jsx';
+import Admin from './components/admin.jsx';
 
 const Layout = () => {
   return (
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         element: <Cart />
       }
     ]
+  },
+  {
+    path: '/admin',
+    element: <Admin />
   },
   {
     path: '/login',

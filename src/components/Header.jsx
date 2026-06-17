@@ -6,8 +6,13 @@ import { Link,NavLink,useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/Context.jsx';
 
 const Header = () => {
+
     const navigate = useNavigate();
-    const {Logout,Search,filteredProducts,setFilteredProducts} = useAppContext();
+    const {Logout,Search,filteredProducts,setFilteredProducts,state,dispatch} = useAppContext();
+    const role = localStorage.getItem("role");
+    const handleAdminClick = () => {
+        navigate('/admin');
+    }
     const handleLogoClick = () => {
         navigate('/');
     }
@@ -21,6 +26,18 @@ const Header = () => {
 
     const handleSearchClick = () => {
         SetSearch(true);
+    }
+
+    const handleUserLogout = () => {
+        dispatch({type:"logout"});
+        navigate('/login');
+    }
+    const handleExit= () =>{
+        localStorage.removeItem("UserName");
+        localStorage.removeItem("email");
+        localStorage.removeItem("firstName");
+        localStorage.removeItem("role");
+        state.isLoggedIn = false;
     }
 
     const handleSearchSubmit = () => {
@@ -55,17 +72,18 @@ const Header = () => {
                         <FaShoppingCart />
                         </NavLink>
                     </button>
-                    <button type='button' className='ml-4 w-8 h-8 rounded-2xl text-gray-800 rounded cursor-pointer hover:bg-black hover:text-white flex items-center justify-center' onClick={Logout}>
+                    <button type='button' className='ml-4 w-8 h-8 rounded-2xl text-gray-800 rounded cursor-pointer hover:bg-black hover:text-white flex items-center justify-center' onClick={Logout,handleExit}>
                         <NavLink to="/SignUp" className="flex items-center justify-center w-full h-full">
                             <FaSignInAlt />
                         </NavLink>
                         
                     </button>
-                    <button type='button' className='ml-4 w-8 h-8 rounded-2xl text-gray-800 rounded cursor-pointer hover:bg-black hover:text-white flex items-center justify-center'>
+                    <button type='button' className='ml-4 w-8 h-8 rounded-2xl text-gray-800 rounded cursor-pointer hover:bg-black hover:text-white flex items-center justify-center' onClick={handleUserLogout}>
                         <NavLink to="/login" className="flex items-center justify-center w-full h-full">
                             <FaUser />
                         </NavLink> 
                     </button>
+                    {role === 'admin' ? <input type='button' id = 'button' className='h-8 text-black rounded cursor-pointer hover:bg-black hover:text-white w-22 transition-colors' value='Admin' onClick={handleAdminClick} /> : null}
                 </div>
             </div>
         </>
