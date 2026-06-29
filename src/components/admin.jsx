@@ -12,10 +12,11 @@ const Admin = () => {
 
     useEffect(()=>{
         if(state.role !== "admin"){
-            alert("You are not authorized to access this page");
             navigate('/');
+            alert("You are not authorized to access this page.");
+
         }
-    },[state.role])
+    },[])
 
     return (
         <div className="bg-[#141A26] w-full min-h-screen text-white pt-10 pb-10 px-4">

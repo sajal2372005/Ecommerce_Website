@@ -70,7 +70,7 @@ const Footer = () => {
         </div>
         <div style = {{borderBottom: '1px solid #ccc' ,marginLeft: '40px', marginRight: '40px'}}></div>
         <div className="text-start py-4 text-gray-400 m:t-4 pl-22">
-            <p className="cursor-pointer">&copy; 2024 Fashion. All rights reserved.</p>
+            <p className="cursor-pointer">&copy; 2026 Fashion. All rights reserved.</p>
         </div>
         </div>
     )
