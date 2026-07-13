@@ -140,9 +140,8 @@ const AppProvider = ({ children }) => {
         }
 
     return(
-        <AppContext.Provider value={{ Api, filteredProducts, setFilteredProducts, setApi, cUserName, cSetUserName, cPassword, cSetPassword, cToken, cSetToken, Logout, product,setProduct, addToCart, removeFromCart, Search, CLogin ,state, dispatch, previousOrder, setPreviousOrder}
-}>
-    { children }
+        <AppContext.Provider value={{ Api, filteredProducts, setFilteredProducts, setApi, cUserName, cSetUserName, cPassword, cSetPassword, cToken, cSetToken, Logout, product,setProduct, addToCart, removeFromCart, Search, CLogin ,state, dispatch, previousOrder, setPreviousOrder}}>
+            { children }
         </AppContext.Provider >
     )
 }

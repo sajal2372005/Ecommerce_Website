@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as motion from "motion/react-client"
 import { useAppContext } from '../context/Context.jsx';
 

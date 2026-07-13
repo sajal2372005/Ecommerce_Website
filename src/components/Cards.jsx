@@ -2,14 +2,22 @@ import React,{useState} from 'react';
 import {useAppContext} from '../context/Context.jsx';
 import * as motion from "motion/react-client"
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
+import {useNavigate} from 'react-router-dom';
 
  
 
 const Cards = ({id, title, price, image }) => {
+    const navigate = useNavigate();
     const {product,addToCart,removeFromCart} = useAppContext();
     
     const isAdded = product.some((item) => item.id === id);
-    const handleAddToCart = (id, title, price, image) =>{
+    const handleAddToCart = async (id, title, price, image) =>{
+        const name = localStorage.getItem('UserName');
+        if (!name){
+            await new Promise((resolve)=>setTimeout(resolve,200))
+            navigate('/login')
+            return
+        }
         addToCart({id,title,price,image,count:1})
     }
     const handleRemoveFromCart = (id) =>{

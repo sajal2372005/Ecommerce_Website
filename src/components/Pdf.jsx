@@ -1,16 +1,11 @@
 import React from 'react';
 import { Document, Page, Text, View } from '@react-pdf/renderer';
 
-const PDF = ({ orderData }) => {
-    const myDate = new Date();
-    const orderDate = myDate.toLocaleDateString('en-US', {
-        year: 'numeric', month: 'long', day: 'numeric'
-    });
-    const userName = localStorage.getItem('UserName') || 'Customer';
-    const userEmail = localStorage.getItem('email') || 'Email';
-    const orderId = localStorage.getItem('rzp_stored_checkout_id') || 'Order ID';
 
-    if (!orderData) {
+
+const PDF = ({ orderData }) => {
+   
+    if (!orderData || orderData.length === 0) {
         return (
             <Document>
                 <Page size="A4" style={{ padding: 40, fontFamily: 'Helvetica' }}>
@@ -20,7 +15,17 @@ const PDF = ({ orderData }) => {
         );
     }
 
-    const items = orderData.length > 0 ? orderData : [];
+    const myDate = new Date();
+    const orderDate = myDate.toLocaleDateString('en-US', {
+        year: 'numeric', month: 'long', day: 'numeric'
+    });
+    
+    const userName = localStorage.getItem('UserName') || 'Customer';
+    const userEmail = localStorage.getItem('email') || 'Email';
+    const orderId = localStorage.getItem('rzp_stored_checkout_id') || 'Order ID';
+
+    
+    const totalAmount = orderData.reduce((sum, item) => sum + (item.price * item.count), 0);
 
     return (
         <Document>
@@ -57,23 +62,22 @@ const PDF = ({ orderData }) => {
                         <Text style={{ color: "#fff", fontSize: 12, width: "16%", textAlign: 'center' }}>Price</Text>
                     </View>
 
-                    {items.length > 0 ? (
-                        items.map((item, index) => (
-                            <View
-                                key={item.id ?? index}
-                                style={{ flexDirection: "row", borderBottomWidth: 1, borderBottomColor: '#ccc', padding: 8, alignItems: 'center' }}
-                            >
-                                <Text style={{ fontSize: 12, width: "16%", textAlign: 'center' }}>{index + 1}</Text>
-                                <Text style={{ fontSize: 12, width: "52%", textAlign: 'left' }}>{item.title}</Text>
-                                <Text style={{ fontSize: 12, width: "16%", textAlign: 'center' }}>{item.count}</Text>
-                                <Text style={{ fontSize: 12, width: "16%", textAlign: 'center' }}>${item.price}</Text>
-                            </View>
-                        ))
-                    ) : (
-                        <View style={{ padding: 8 }}>
-                            <Text style={{ fontSize: 12 }}>No items in this order.</Text>
+                    {orderData.map((item, index) => (
+                        <View
+                            key={item.id ?? index}
+                            style={{ flexDirection: "row", borderBottomWidth: 1, borderBottomColor: '#ccc', padding: 8, alignItems: 'center' }}
+                        >
+                            <Text style={{ fontSize: 12, width: "16%", textAlign: 'center' }}>{index + 1}</Text>
+                            <Text style={{ fontSize: 12, width: "52%", textAlign: 'left' }}>{item.title}</Text>
+                            <Text style={{ fontSize: 12, width: "16%", textAlign: 'center' }}>{item.count}</Text>
+                            <Text style={{ fontSize: 12, width: "16%", textAlign: 'center' }}>${item.price}</Text>
                         </View>
-                    )}
+                    ))}
+
+                    <View style={{ flexDirection: "row", padding: 8, alignItems: 'space-around' }}>
+                        <Text style={{ color: "#000", fontSize: 12, width: "50%", textAlign: 'left', paddingLeft: 20 }}>Total Amount:</Text>
+                        <Text style={{ color: "#000", fontSize: 12, width: "50%", textAlign: 'right',paddingRight: 20 }}>${totalAmount.toFixed(2)}</Text>
+                    </View>
 
                 </View>
             </Page>

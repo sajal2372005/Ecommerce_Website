@@ -7,9 +7,8 @@ import Login from './components/Login.jsx';
 import AppProvider from './context/Context.jsx';
 import SignUp from './components/SignUp.jsx';
 import Products from './components/Products.jsx';
-import Cart from './components/Cart.jsx';
+import Cart from './components/cart.jsx';
 import Admin from './components/admin.jsx';
-import PDF from './components/Pdf.jsx';
 import InvoicePreviewPage from './components/PDFViewer.jsx';
 
 const Layout = () => {
