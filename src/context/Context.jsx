@@ -44,13 +44,15 @@ const AppProvider = ({ children }) => {
                 if(findLocal){
                     localStorage.setItem("role", "user");
                     localStorage.setItem("UserName", findLocal.username);
+                    localStorage.setItem("email", findLocal.email);
+                    localStorage.setItem("role", findLocal.role);
                     return{...state, username: findLocal.username,email: findLocal.email,password: findLocal.password, role: "user", isLoggedIn: true}
                 }
             }
-            else{
-                alert("Invalid username or password");
-                return state;
-            }
+            
+            alert("Invalid username or password");
+                
+            return state;
         }
         else if (action.type === "logout"){
             localStorage.removeItem("role");
@@ -80,7 +82,7 @@ const AppProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
-        
+    const [previousOrder, setPreviousOrder] = useState([]);  
 
     const [product, setProduct] = useState([]);
         const addToCart = (item) => {
@@ -126,7 +128,7 @@ const AppProvider = ({ children }) => {
             return ans;
 
         }
-
+    
     const Logout = () => {
             cSetToken(null);
             localStorage.removeItem("token");
@@ -138,7 +140,7 @@ const AppProvider = ({ children }) => {
         }
 
     return(
-        <AppContext.Provider value={{ Api, filteredProducts, setFilteredProducts, setApi, cUserName, cSetUserName, cPassword, cSetPassword, cToken, cSetToken, Logout, product, addToCart, removeFromCart, Search, CLogin ,state, dispatch}
+        <AppContext.Provider value={{ Api, filteredProducts, setFilteredProducts, setApi, cUserName, cSetUserName, cPassword, cSetPassword, cToken, cSetToken, Logout, product,setProduct, addToCart, removeFromCart, Search, CLogin ,state, dispatch, previousOrder, setPreviousOrder}
 }>
     { children }
         </AppContext.Provider >

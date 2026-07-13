@@ -39,6 +39,10 @@ const Header = () => {
         localStorage.removeItem("email");
         localStorage.removeItem("firstName");
         localStorage.removeItem("role");
+        localStorage.removeItem("rzp_stored_checkout_id");
+        localStorage.removeItem("previousOrder");
+        localStorage.removeItem("rzp_checkout_anon_id");
+        localStorage.removeItem("rzp_device_id");
         state.isLoggedIn = false;
     }
 

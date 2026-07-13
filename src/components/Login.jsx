@@ -47,7 +47,7 @@ const Login = () => {
             navigate('/');
         }
         
-    },[state.isLoggedIn])
+    },[state.isLoggedIn, navigate]);
     const handleLogin = () => {
         if (LuserName === "" || Lpassword === "") {
             alert("Please fill in all fields");

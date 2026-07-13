@@ -10,7 +10,7 @@ const Cards = ({id, title, price, image }) => {
     
     const isAdded = product.some((item) => item.id === id);
     const handleAddToCart = (id, title, price, image) =>{
-        addToCart({id,title,price,image})
+        addToCart({id,title,price,image,count:1})
     }
     const handleRemoveFromCart = (id) =>{
         removeFromCart(id);

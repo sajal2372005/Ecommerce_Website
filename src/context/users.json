@@ -52,4 +52,14 @@
     "email": "anjali.reddy@example.com",
     "password": "anjaliSecure",
     "role": "admin"
-  }]
+  },
+  {
+    "id": "7",
+    "firstName": "Sajal",
+    "lastName": "Goswami",
+    "username": "Sajal",
+    "email": "sajal.goswami@example.com",
+    "password": "sajal",
+    "role": "admin"
+  }
+]

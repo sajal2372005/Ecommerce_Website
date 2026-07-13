@@ -9,6 +9,8 @@ import SignUp from './components/SignUp.jsx';
 import Products from './components/Products.jsx';
 import Cart from './components/Cart.jsx';
 import Admin from './components/admin.jsx';
+import PDF from './components/Pdf.jsx';
+import InvoicePreviewPage from './components/PDFViewer.jsx';
 
 const Layout = () => {
   return (
@@ -36,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: '/cart',
         element: <Cart />
+      },
+      {
+        path: "/Pdf",
+        element: <InvoicePreviewPage />
       }
     ]
   },

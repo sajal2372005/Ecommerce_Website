@@ -1,12 +1,17 @@
 import React,{useState} from 'react';
 import {useAppContext} from '../context/Context.jsx';
 
-const ProductCards = ({id, title, price, image }) => {
+const ProductCards = ({id, title, price, image, count: initialCount }) => {
     const {product,addToCart,removeFromCart} = useAppContext();
-    const [count, setCount] = useState(1);
+    const [count, setCount] = useState(initialCount || 1);
     const isAdded = product.some((item) => item.id === id);
     const handleAddToCart = (id, title, price, image) =>{
-        addToCart({id,title,price,image})
+        const item = product.find((item)=>(item.id === id));
+        if(item){
+            setCount(count+1);
+            item.count = count+1;
+            console.log(item.count);
+        }    
     }
     const handleRemoveFromCart = (id) =>{
         if(count>1) {
@@ -18,7 +23,7 @@ const ProductCards = ({id, title, price, image }) => {
         
     }
     return (
-        <div className="w-full max-w-[400px] bg-white border border-gray-100 rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-xl transition-shadow duration-300">
+        <div className="w-full max-w-[400px] bg-white border border-gray-100 rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-xl transition-shadow duration-300 z-900">
 
                     <div className="h-64 w-full bg-white flex items-center justify-center p-6">
                         <img
@@ -36,7 +41,7 @@ const ProductCards = ({id, title, price, image }) => {
                         <div className=" flex justify-between w-full mt-3 bg-black text-white py-3 px-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
                             <button style={{ fontWeight: 'bold', width: '40px' }} onClick={()=>handleRemoveFromCart(id)}>-</button>
                             <span style={{ fontWeight: 'bold' }}>{count}</span>
-                            <button style={{ fontWeight: 'bold', width: '40px' }} onClick={()=>{setCount(count+1)}}>+</button>
+                            <button style={{ fontWeight: 'bold', width: '40px' }} onClick={()=>{handleAddToCart(id, title, price, image)}}>+</button>
                         </div>
 
                         
