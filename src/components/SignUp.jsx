@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import { useState } from 'react';
 import Fashion from '../assets/Fashion.png';
 import './login.css';
 import {Link,useNavigate} from 'react-router-dom';
@@ -6,7 +6,7 @@ import {useAppContext} from '../context/Context.jsx';
 
 
 const SignUp = () => {
-    const {cUserName,cSetUserName,cPassword,cSetPassword,dispatch} = useAppContext();
+    const {dispatch} = useAppContext();
     const navigate = useNavigate();
     const [userName,setUserName] = useState("");
     const [password,setPassword] = useState("");

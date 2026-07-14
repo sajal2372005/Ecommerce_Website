@@ -1,18 +1,17 @@
-import React,{useState,useEffect} from 'react';
+import { useState } from 'react';
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
-import Cards from './Cards';
-import Arrows from './Arrows.jsx';
+import Cards from './Cards.jsx';
 import Title from './Title.jsx';
 import { useAppContext } from '../context/Context.jsx';
-import { useNavigate } from 'react-router-dom';
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 
 const Home = () => {
     
-    const { Api,cUserName,cPassword} = useAppContext();
+    const {Api} = useAppContext();
     let [count,setCount] = useState(1);
     const Next= () => {
         if(count < Api.length-3) setCount(count+1);
+        else setCount(0);
     }
     const prev = () =>{
         if(count > 0 ) setCount(count-1);
@@ -28,21 +27,23 @@ const Home = () => {
                         <button className="border-none cursor-pointer ml-2 hover:-translate-y-1 transition-transform" onClick={Next}><FaArrowRight /></button>
                     </div>
                 </div>
-                
-                <div className="w-[95%] mx-auto mt-5 bg-white border border-gray-300 flex flex-wrap justify-around items-center gap-6 rounded-xl">
-                    <BackgroundBeamsWithCollision className="w-full h-full flex flex-wrap justify-around items-center gap-6 rounded-xl" >
+
+
+                <div style={{ width: "100%", paddingTop: "10px" }}>
+                <BackgroundBeamsWithCollision className="w-[95%] mx-auto bg-white border border-gray-300 py-10 px-5 flex flex-wrap justify-around items-center  gap-6 rounded-xl">
                     {
                         Api.slice(count,count+3).map((item) => {
                             return <Cards key={item.id} id={item.id} title={item.title} price={item.price} image={item.image} />
                         })
                     }
-                    </BackgroundBeamsWithCollision>
-                </div>
+
+                </BackgroundBeamsWithCollision>
+
+            </div>
+                
             </div>
         </>
     )
 }
 
 export default Home;
-
-// <img src="https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_t.png" alt="Placeholder" style={{maxWidth: '3/7%', maxHeight: '86%'}} />

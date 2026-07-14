@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext ,useReducer} from 'react';
+import { useState, useEffect, createContext, useContext, useReducer } from 'react';
 import credentials from './users.json';
 
 export const AppContext = createContext();
@@ -12,22 +12,17 @@ const AppProvider = ({ children }) => {
     }, []);
 
 
-    const [cUserName, cSetUserName] = useState("");
-    const [cPassword, cSetPassword] = useState("");
-    const [cToken, cSetToken] = useState(localStorage.getItem("token") || null);
-
-     
     const userArray = localStorage.getItem("userArray");
     const [users, setUsers] = useState(userArray ? JSON.parse(userArray) : []);
 
     const initialState = {
         isLoggedIn: false,
-        "firstName": "" || localStorage.getItem("firstName"),
-        "lastName": "" || localStorage.getItem("lastName"),
-        "username": "" || localStorage.getItem("UserName"),
-        "email": "" || localStorage.getItem("email"),
+        "firstName": localStorage.getItem("firstName") ?? "",
+        "lastName": localStorage.getItem("lastName") ?? "",
+        "username": localStorage.getItem("UserName") ?? "",
+        "email": localStorage.getItem("email") ?? "",
         "password": "",
-        "role": "" || localStorage.getItem("role")};
+        "role": localStorage.getItem("role") ?? ""};
 
     const reducer = (state,action) =>{
         if (action.type === "login"){
@@ -76,13 +71,13 @@ const AppProvider = ({ children }) => {
             localStorage.setItem("userArray",JSON.stringify(users.filter((user)=> user.username !== action.payload.username || user.password !== action.payload.password)));
             return state;
         }
+
+        return state;
         
     }
 
 
     const [state, dispatch] = useReducer(reducer, initialState);
-
-    const [previousOrder, setPreviousOrder] = useState([]);  
 
     const [product, setProduct] = useState([]);
         const addToCart = (item) => {
@@ -107,40 +102,15 @@ const AppProvider = ({ children }) => {
             }
         }
 
-    const CLogin = async (LuserName, Lpassword) => {
-            const Credentails = { username: LuserName, password: Lpassword };
-            let ans;
-            const response = await fetch('https://fakestoreapi.com/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(Credentails)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data.token);
-                    ans = data;
-                    localStorage.setItem("token", data.token);
-                    localStorage.setItem("UserName", LuserName);
-                    cSetToken(data.token);
-                    cSetUserName(LuserName);
-                    return data
-                });
-            return ans;
-
-        }
     
     const Logout = () => {
-            cSetToken(null);
             localStorage.removeItem("token");
             localStorage.removeItem("UserName");
-            cSetUserName("");
-            cSetPassword("");
-            cSetToken(null);
             dispatch({type:"logout"});
         }
 
     return(
-        <AppContext.Provider value={{ Api, filteredProducts, setFilteredProducts, setApi, cUserName, cSetUserName, cPassword, cSetPassword, cToken, cSetToken, Logout, product,setProduct, addToCart, removeFromCart, Search, CLogin ,state, dispatch, previousOrder, setPreviousOrder}}>
+        <AppContext.Provider value={{ Api, filteredProducts, setFilteredProducts, Logout, product, setProduct, addToCart, removeFromCart, Search, state, dispatch }}>
             { children }
         </AppContext.Provider >
     )

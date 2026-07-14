@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAppContext } from '../context/Context.jsx';
 import ProductCards from './ProductCards.jsx';
 import PaymentButton from './payment.jsx';

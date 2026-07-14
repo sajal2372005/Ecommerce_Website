@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import { useEffect } from 'react';
 import credentials from '../context/users.json';
 import AdminCards from './AdminCards.jsx';
 import {useNavigate} from 'react-router-dom';
@@ -16,7 +16,7 @@ const Admin = () => {
             alert("You are not authorized to access this page.");
 
         }
-    },[])
+    },[navigate, state.role])
 
     return (
         <div className="bg-[#141A26] w-full min-h-screen text-white pt-10 pb-10 px-4">

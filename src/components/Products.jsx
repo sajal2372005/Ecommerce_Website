@@ -1,7 +1,5 @@
-import React from 'react';
 import { useAppContext } from '../context/Context.jsx';
 import Cards from './Cards.jsx';
-import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 
 const Products = () => {
     const { Api ,filteredProducts} = useAppContext();

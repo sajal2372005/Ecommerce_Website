@@ -1,4 +1,3 @@
-import React,{useState} from 'react';
 import {useAppContext} from '../context/Context.jsx';
 import * as motion from "motion/react-client"
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";

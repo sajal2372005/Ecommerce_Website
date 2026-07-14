@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Fashion from '../assets/Fashion.png';
 import './login.css';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,34 +6,6 @@ import { useAppContext } from '../context/Context.jsx';
 
 
 const Login = () => {
-    // const useToken = localStorage.getItem("token");
-    // const useUserName = localStorage.getItem("UserName");
-    // const usePassword = localStorage.getItem("Password");
-    // const {cUserName,cSetUserName,cPassword,cSetPassword} = useAppContext();
-    // const navigate = useNavigate();
-    // const [userName,setUserName] = useState(useUserName || "");
-    // const [password,setPassword] = useState(usePassword || "");
-    // const handleLogin = () =>{
-    //     if (!useToken) {
-    //         alert("Please sign up to log in");
-    //         navigate('/signup');
-    //         return;
-    //     }
-    //     if(userName === "" || password === ""){
-    //         alert("Please fill in all fields");
-    //         return;
-    //     }
-    //     else{
-    //         if(userName === useUserName && password === usePassword){
-    //             cSetUserName(userName);
-    //             cSetPassword(password);
-    //             navigate('/');
-    //         }
-    //         else{
-    //             alert("Invalid username or password");
-    //         }
-    //     }
-    // }
     const localUserName = localStorage.getItem("UserName");
     const localPassword = localStorage.getItem("Password");
     const navigate = useNavigate();

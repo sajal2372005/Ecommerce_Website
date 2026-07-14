@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import logo from '../assets/Fashion.png';
 import './Header.css';
 import { FaShoppingCart, FaUser, FaSignInAlt } from "react-icons/fa";
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/Context.jsx';
 import { GooeyInput } from "@/components/ui/gooey-input";
 
@@ -10,7 +10,7 @@ import { GooeyInput } from "@/components/ui/gooey-input";
 const Header = () => {
 
     const navigate = useNavigate();
-    const { Logout, Search, filteredProducts, setFilteredProducts, state, dispatch } = useAppContext();
+    const { Logout, Search, setFilteredProducts, dispatch } = useAppContext();
     const role = localStorage.getItem("role");
     const handleAdminClick = () => {
         navigate('/admin');
@@ -26,10 +26,6 @@ const Header = () => {
         navigate('/Cart');
     }
 
-    const handleSearchClick = () => {
-        SetSearch(true);
-    }
-
     const handleUserLogout = () => {
         dispatch({ type: "logout" });
         navigate('/login');
@@ -43,7 +39,6 @@ const Header = () => {
         localStorage.removeItem("previousOrder");
         localStorage.removeItem("rzp_checkout_anon_id");
         localStorage.removeItem("rzp_device_id");
-        state.isLoggedIn = false;
     }
 
     
@@ -51,13 +46,11 @@ const Header = () => {
     const handleSearchSubmit = () => {
         setSearchTerm('');
         SetSearch(false);
-        const results = Search(searchTerm);
-        console.log('Search results:', results);
-        console.log('Filtered products from context:', filteredProducts);
+        Search(searchTerm);
         navigate('/products');
     }
 
-    const [hSearch, SetSearch] = useState(false);
+    const [, SetSearch] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     return (
         <>

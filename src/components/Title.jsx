@@ -1,6 +1,3 @@
-import React from 'react';
-import { SquigglyText } from "@/components/ui/squiggly-text";
-
 const Title = () => {
     const userName = localStorage.getItem("UserName");
     return (

@@ -1,11 +1,10 @@
-import React,{useState} from 'react';
+import { useState } from 'react';
 import {useAppContext} from '../context/Context.jsx';
 
 const ProductCards = ({id, title, price, image, count: initialCount }) => {
-    const {product,addToCart,removeFromCart} = useAppContext();
+    const {product,removeFromCart} = useAppContext();
     const [count, setCount] = useState(initialCount || 1);
-    const isAdded = product.some((item) => item.id === id);
-    const handleAddToCart = (id, title, price, image) =>{
+    const handleAddToCart = (id) =>{
         const item = product.find((item)=>(item.id === id));
         if(item){
             setCount(count+1);
@@ -41,7 +40,7 @@ const ProductCards = ({id, title, price, image, count: initialCount }) => {
                         <div className=" flex justify-between w-full mt-3 bg-black text-white py-3 px-4 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
                             <button style={{ fontWeight: 'bold', width: '40px' }} onClick={()=>handleRemoveFromCart(id)}>-</button>
                             <span style={{ fontWeight: 'bold' }}>{count}</span>
-                            <button style={{ fontWeight: 'bold', width: '40px' }} onClick={()=>{handleAddToCart(id, title, price, image)}}>+</button>
+                            <button style={{ fontWeight: 'bold', width: '40px' }} onClick={()=>{handleAddToCart(id)}}>+</button>
                         </div>
 
                         
