@@ -3,6 +3,9 @@ import Fashion from '../assets/Fashion.png';
 import './login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/Context.jsx';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from "jwt-decode";
 
 
 const Login = () => {
@@ -11,28 +14,28 @@ const Login = () => {
     const navigate = useNavigate();
     const [LuserName, setUserName] = useState(localUserName || "");
     const [Lpassword, setPassword] = useState(localPassword || "");
-    const { state, dispatch } = useAppContext();
+    const { state, dispatch,users } = useAppContext();
 
 
-    useEffect(() =>{
-        if (state.isLoggedIn){
+    useEffect(() => {
+        if (state.isLoggedIn) {
             navigate('/');
         }
-        
-    },[state.isLoggedIn, navigate]);
+
+    }, [state.isLoggedIn, navigate]);
     const handleLogin = () => {
         if (LuserName === "" || Lpassword === "") {
             alert("Please fill in all fields");
             return;
         }
-        else{
-            dispatch({type:"login", payload:{username: LuserName, password: Lpassword}});
-            
+        else {
+            dispatch({ type: "login", payload: { username: LuserName, password: Lpassword } });
+
         }
-        
+
     }
     return (
-        <>
+        <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
             <div className="login-page">
                 <div className="login-page__overlay">
                 </div>
@@ -47,12 +50,37 @@ const Login = () => {
                     <button id="login-button" onClick={handleLogin}>Log In</button>
                     <p className="login-page__signup-link">Don't have an account? <Link to="/signup" style={{ color: 'blue', textDecoration: 'underline', display: 'inline' }}>Sign Up</Link></p>
 
+                    <GoogleLogin
+                        theme="outline"
+                        size="large"
+                        shape="pill"
+                        onSuccess={(credentialResponse) => {
+                            const token = credentialResponse.credential;
+                            const decodedData = jwtDecode(token);
+                            const userExists = users.some((user)=> user.username === decodedData.given_name && user.email === decodedData.email);
+                            if (!userExists) {
+                                navigate('/signup');
+                                return;
+                            }
+                                
+                            console.log("Full User Data:", decodedData);
+                            localStorage.setItem("UserName", decodedData.given_name);
+                            localStorage.setItem("email", decodedData.email);
+                            localStorage.setItem("firstName", decodedData.name);
+                            localStorage.setItem("role", "user");
+                            navigate('/');
+                        }}
+                        onError={() => {
+                            console.log('Login Failed');
+                        }}
+                    />
+
                 </div>
 
 
             </div>
 
-        </>
+        </GoogleOAuthProvider>
     )
 }
 

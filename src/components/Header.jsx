@@ -58,7 +58,7 @@ const Header = () => {
             <div id="mainHeader" style={{ height: '80px' }} className="fixed flex items-center w-full bg-white text-white mb-6 z-1000">
                 <div id="navLogo" className="ml-10 flex items-center">
                     <img src={logo} alt="logo" className="logo mr-26 cursor-pointer" onClick={handleLogoClick} />
-                    <div style={{ display: 'flex', gap: '10px',marginRight:'10px' }}>
+                    <div style={{ display: 'flex', gap: '6px',marginRight:'14px' }}>
 
                     <input type='button' id='button' className='h-10 w-28 rounded-3xl text-black rounded cursor-pointer hover:bg-black hover:text-white w-22 transition-colors' value='Products' onClick={handleProductsClick} />
                     <input type='button' id='button' className='h-10 w-28 rounded-3xl text-black rounded cursor-pointer hover:bg-black hover:text-white w-22 transition-colors' value='Company' />

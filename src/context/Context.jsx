@@ -22,7 +22,8 @@ const AppProvider = ({ children }) => {
         "username": localStorage.getItem("UserName") ?? "",
         "email": localStorage.getItem("email") ?? "",
         "password": "",
-        "role": localStorage.getItem("role") ?? ""};
+        "role": localStorage.getItem("role") ?? ""
+    };
 
     const reducer = (state,action) =>{
         if (action.type === "login"){
@@ -40,7 +41,6 @@ const AppProvider = ({ children }) => {
                     localStorage.setItem("role", "user");
                     localStorage.setItem("UserName", findLocal.username);
                     localStorage.setItem("email", findLocal.email);
-                    localStorage.setItem("role", findLocal.role);
                     return{...state, username: findLocal.username,email: findLocal.email,password: findLocal.password, role: "user", isLoggedIn: true}
                 }
             }
@@ -67,8 +67,8 @@ const AppProvider = ({ children }) => {
             return {...state,isLoggedIn: true, firstName: action.payload.firstName, username: action.payload.username,email: action.payload.email,password: action.payload.password, role: action.payload.role}
         }
         else if (action.type === "deleteUser"){
-            setUsers(users.filter((user)=> user.username !== action.payload.username || user.password !== action.payload.password));
-            localStorage.setItem("userArray",JSON.stringify(users.filter((user)=> user.username !== action.payload.username || user.password !== action.payload.password)));
+            setUsers(users.filter((user)=> user.username !== action.payload.username || user.email !== action.payload.email));
+            localStorage.setItem("userArray",JSON.stringify(users.filter((user)=> user.username !== action.payload.username || user.email !== action.payload.email)));
             return state;
         }
 
@@ -110,7 +110,7 @@ const AppProvider = ({ children }) => {
         }
 
     return(
-        <AppContext.Provider value={{ Api, filteredProducts, setFilteredProducts, Logout, product, setProduct, addToCart, removeFromCart, Search, state, dispatch }}>
+        <AppContext.Provider value={{ Api, filteredProducts, setFilteredProducts, Logout, product, setProduct, addToCart, removeFromCart, Search, state, dispatch ,users}}>
             { children }
         </AppContext.Provider >
     )

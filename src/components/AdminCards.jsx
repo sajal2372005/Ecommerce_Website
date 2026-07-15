@@ -4,7 +4,7 @@ import {useAppContext} from '../context/Context.jsx';
 const AdminCards = ({ user }) => {
     const {dispatch} = useAppContext();
     const handleDeleteUser = () =>{
-        dispatch({type:"deleteUser", payload:{username: user.username, password: user.password}});
+        dispatch({type:"deleteUser", payload:{username: user.username, email: user.email}});
     }
     return (
         <div>

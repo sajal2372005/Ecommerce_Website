@@ -1,4 +1,6 @@
-import { Document, Page, Text, View } from '@react-pdf/renderer';
+import { Document, Page, Text, View ,Image} from '@react-pdf/renderer';
+import logo from '../assets/Fashion.png';
+import './Header.css';
 
 
 
@@ -31,8 +33,9 @@ const PDF = ({ orderData }) => {
             <Page size="A4" style={{ padding: 40, fontFamily: 'Helvetica' }}>
                 <View style={{ width: "100%", padding: 20, borderWidth: 1, borderColor: '#000' }}>
 
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottomWidth: 1, borderBottomColor: '#000', paddingBottom: 15, marginBottom: 20 }}>
-                        <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Order Invoice</Text>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderBottomWidth: 1, borderBottomColor: '#000', paddingBottom: 10, marginBottom: 20 }}>
+                        <Image src={logo} alt="logo" style={{ width: 80 }} />
+                        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Order Invoice</Text>
                     </View>
 
                     <View style={{ marginBottom: 20 }}>
@@ -73,7 +76,7 @@ const PDF = ({ orderData }) => {
                         </View>
                     ))}
 
-                    <View style={{ flexDirection: "row", padding: 8, alignItems: 'space-around' }}>
+                    <View style={{ borderTopWidth: 1, borderColor: '#000', flexDirection: "row", padding: 8, alignItems: 'space-around' }}>
                         <Text style={{ color: "#000", fontSize: 12, width: "50%", textAlign: 'left', paddingLeft: 20 }}>Total Amount:</Text>
                         <Text style={{ color: "#000", fontSize: 12, width: "50%", textAlign: 'right',paddingRight: 20 }}>${totalAmount.toFixed(2)}</Text>
                     </View>
