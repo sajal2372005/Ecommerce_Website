@@ -17,7 +17,7 @@ const loadScript = (src) => {
 
 const PaymentButton = () => {
     
-    const { product, setProduct } = useAppContext();
+    const { product, setProduct,setPaymentDetails } = useAppContext();
     const handlePayment = async () => {
         const totalAmountInCents = product.reduce((sum, item) => {
             return sum + Math.round(item.price * 100) * (item.count || 1);
@@ -51,6 +51,7 @@ const PaymentButton = () => {
         });
         paymentObject.on('payment.success', async function (response) {
             console.log("Payment Successful", response);
+            setPaymentDetails(response);
             
             const temp = product.map((item) => ({ ...item }));
         

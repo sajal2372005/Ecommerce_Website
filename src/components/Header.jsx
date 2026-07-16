@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import logo from '../assets/Fashion.png';
 import './Header.css';
-import { FaShoppingCart, FaUser, FaSignInAlt } from "react-icons/fa";
+import { FaShoppingCart, FaUser, FaSignInAlt,FaComment } from "react-icons/fa";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../context/Context.jsx';
 import { GooeyInput } from "@/components/ui/gooey-input";
@@ -10,7 +10,7 @@ import { GooeyInput } from "@/components/ui/gooey-input";
 const Header = () => {
 
     const navigate = useNavigate();
-    const { Logout, Search, setFilteredProducts, dispatch } = useAppContext();
+    const { Logout, Search, setFilteredProducts, dispatch, chatOpen, SetChatOpen } = useAppContext();
     const role = localStorage.getItem("role");
     const handleAdminClick = () => {
         navigate('/admin');
@@ -40,6 +40,8 @@ const Header = () => {
         localStorage.removeItem("rzp_checkout_anon_id");
         localStorage.removeItem("rzp_device_id");
     }
+
+    
 
     
 
@@ -99,6 +101,10 @@ const Header = () => {
                         <NavLink to="/login" className="flex items-center justify-center w-full h-full">
                             <FaUser />
                         </NavLink>
+                    </button>
+
+                    <button type='button' className='ml-4 w-8 h-8 rounded-2xl text-gray-800 rounded cursor-pointer hover:bg-black hover:text-white flex items-center justify-center' onClick={()=>{SetChatOpen(true )}}>
+                            <FaComment/>
                     </button>
                     {role === 'admin' ? <input type='button' id='button' className='h-8 text-black rounded cursor-pointer hover:bg-black hover:text-white w-22 transition-colors' value='Admin' onClick={handleAdminClick} /> : null}
                 </div>

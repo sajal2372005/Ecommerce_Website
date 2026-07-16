@@ -108,9 +108,11 @@ const AppProvider = ({ children }) => {
             localStorage.removeItem("UserName");
             dispatch({type:"logout"});
         }
+    const [paymentDetails,setPaymentDetails] = useState(null);
+    const [chatOpen, SetChatOpen] = useState(false);
 
     return(
-        <AppContext.Provider value={{ Api, filteredProducts, setFilteredProducts, Logout, product, setProduct, addToCart, removeFromCart, Search, state, dispatch ,users}}>
+        <AppContext.Provider value={{ Api, filteredProducts, setFilteredProducts, Logout, product, setProduct, addToCart, removeFromCart, Search, state, dispatch ,users, paymentDetails, setPaymentDetails,paymentDetails,setPaymentDetails, chatOpen, SetChatOpen}}>
             { children }
         </AppContext.Provider >
     )

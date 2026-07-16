@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
 import PDF from './Pdf.jsx';
 import * as motion from "motion/react-client"
+import { useAppContext } from '../context/Context.jsx';
 
 const InvoicePreviewPage = () => {
+    const { paymentDetails } = useAppContext();
     const [orderData, setOrderData] = useState(() => {
         const temp = localStorage.getItem('previousOrder');
         return temp ? JSON.parse(temp) : null;
@@ -16,7 +18,7 @@ const InvoicePreviewPage = () => {
             <>
 
                 <div style={{ paddingTop: '80px', textAlign: 'center', display: "flex", justifyContent: "flex-end", paddingRight: "1%" }}>
-                    <PDFDownloadLink document={<PDF orderData={orderData} />} fileName="Order_Invoice.pdf">
+                    <PDFDownloadLink document={<PDF orderData={orderData} paymentDetails={paymentDetails} />} fileName="Order_Invoice.pdf">
                         {({ loading }) =>
                             loading ? <button>Loading document...</button>
                                 :
@@ -28,7 +30,7 @@ const InvoicePreviewPage = () => {
                 </div>
                 <div style={{ width: '100%', height: '100vh', paddingTop: '10px' }}>
                     <PDFViewer width="100%" height="100%">
-                        <PDF orderData={orderData} />
+                        <PDF orderData={orderData} paymentDetails={paymentDetails} />
                     </PDFViewer>
                 </div>
 
