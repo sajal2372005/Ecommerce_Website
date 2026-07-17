@@ -4,10 +4,11 @@ import Cards from './Cards.jsx';
 import Title from './Title.jsx';
 import { useAppContext } from '../context/Context.jsx';
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
+import Chat from './chat.jsx';
 
 const Home = () => {
     
-    const {Api} = useAppContext();
+    const {Api,chatOpen} = useAppContext();
     let [count,setCount] = useState(1);
     const Next= () => {
         if(count < Api.length-3) setCount(count+1);
@@ -19,6 +20,7 @@ const Home = () => {
     return (
 
         <>
+        {chatOpen && <Chat />}
             <div className="w-full h-auto bg-gray-100 py-10">
                 <div className="mt-16">
                     <Title />

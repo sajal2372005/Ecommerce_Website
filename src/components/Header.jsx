@@ -73,7 +73,7 @@ const Header = () => {
                             }
                         }}
                     >
-                        <GooeyInput classNames={{
+                        <GooeyInput id = "searchInput" classNames={{
                             root: "my-4",               // adds margin around whole component
                             input: "text-black placeholder:text-gray-800 text-m", // styles the actual text input
                             trigger: "bg-white text-black border border-black", // styles the trigger button
@@ -86,7 +86,7 @@ const Header = () => {
 
                 </div>
                 <div id='navActions' className='mr-10 flex gap-2'>
-                    <button type='button' className='ml-4 w-8 h-8 rounded-2xl text-gray-800 rounded cursor-pointer hover:bg-black hover:text-white flex items-center justify-center' onClick={handleCartClick}>
+                    <button type='button' id = "searchButton" className='ml-4 w-8 h-8 rounded-2xl text-gray-800 rounded cursor-pointer hover:bg-black hover:text-white flex items-center justify-center' onClick={handleCartClick}>
                         <NavLink to="/Cart" className="flex items-center justify-center w-full h-full">
                             <FaShoppingCart />
                         </NavLink>
@@ -103,7 +103,7 @@ const Header = () => {
                         </NavLink>
                     </button>
 
-                    <button type='button' className='ml-4 w-8 h-8 rounded-2xl text-gray-800 rounded cursor-pointer hover:bg-black hover:text-white flex items-center justify-center' onClick={()=>{SetChatOpen(true )}}>
+                    <button type='button' className='ml-4 w-8 h-8 rounded-2xl text-gray-800 rounded cursor-pointer hover:bg-black hover:text-white flex items-center justify-center' onClick={()=>{SetChatOpen( !chatOpen )}}>
                             <FaComment/>
                     </button>
                     {role === 'admin' ? <input type='button' id='button' className='h-8 text-black rounded cursor-pointer hover:bg-black hover:text-white w-22 transition-colors' value='Admin' onClick={handleAdminClick} /> : null}
