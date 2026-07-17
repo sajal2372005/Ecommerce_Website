@@ -1,10 +1,10 @@
 import { useAppContext } from '../context/Context.jsx';
 import Cards from './Cards.jsx';
-import Chat from './chat.jsx';
+
 const Products = () => {
     const { Api ,filteredProducts,chatOpen} = useAppContext();
     return (<>
-        {chatOpen && <Chat />}
+    
         {filteredProducts.length > 0? <div>
             <div style={{width: "100%" ,paddingTop: "100px",paddingBottom: "20px",marginLeft: "40px",paddingLeft:"10px",borderBottom: "2px solid #ccc"}}>
             <p style={{fontSize: "20px"}}>Filtered Products</p>

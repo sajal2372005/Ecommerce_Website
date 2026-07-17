@@ -4,7 +4,7 @@ import Cards from './Cards.jsx';
 import Title from './Title.jsx';
 import { useAppContext } from '../context/Context.jsx';
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
-import Chat from './chat.jsx';
+
 
 const Home = () => {
     
@@ -20,7 +20,7 @@ const Home = () => {
     return (
 
         <>
-        {chatOpen && <Chat />}
+        
             <div className="w-full h-auto bg-gray-100 py-10">
                 <div className="mt-16">
                     <Title />

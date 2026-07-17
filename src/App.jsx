@@ -9,11 +9,16 @@ import Products from './components/Products.jsx';
 import Cart from './components/cart.jsx';
 import Admin from './components/admin.jsx';
 import InvoicePreviewPage from './components/PDFViewer.jsx';
+import { useAppContext } from './context/Context.jsx';
+import Chat from './components/chat.jsx';
 
 const Layout = () => {
+  const {chatOpen} = useAppContext();
+  
   return (
     <>
       <Header />
+      {chatOpen && <Chat />}
       <Outlet />
       <Footer />
     </>
